@@ -15,8 +15,9 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
-        test: /\.css$/, // Sử dụng style-loader, css-loader cho file .css
-        use: ["style-loader", "css-loader"],
+        test: /\.css$/i, // Sử dụng style-loader, css-loader cho file .css
+        include: path.resolve(__dirname, "src"),
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
   },
