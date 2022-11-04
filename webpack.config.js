@@ -20,6 +20,11 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    compress: true,
+    hot: true,
+    historyApiFallback: true,
+  },
   // Chứa các plugins sẽ cài đặt trong tương lai
   plugins: [
     new HtmlWebpackPlugin({
