@@ -4,6 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { getTrendingGif } from "../../services/gif/gif.service";
 import { useAppStore, useTrendingStore } from "../../stores";
 import clsx from "clsx";
+import { GiphyItem } from "../../components";
 
 const Homepage = () => {
   const [appStore, updateAppStore] = useAppStore();
@@ -52,21 +53,12 @@ const Homepage = () => {
   return (
     <div
       className={clsx(
-        "container mx-auto columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 xxl:columns-6 gap-3"
+        "container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl columns-2 lg:columns-3 xl:columns-4 xxl:columns-5 gap-3"
       )}
     >
-      {console.log(trendingGif[0])}
+      {console.log(trendingGif[5])}
       {!!trendingGif &&
-        trendingGif.map((item, index) => (
-          <div className="relative my-3">
-            <img
-              className="w-full h-auto rounded"
-              src={item?.images?.downsized?.url}
-              alt=""
-              key={item?.id}
-            />
-          </div>
-        ))}
+        trendingGif.map((item, index) => <GiphyItem item={item} />)}
     </div>
   );
 };
