@@ -53,7 +53,7 @@ const Homepage = () => {
   return (
     <div
       className={clsx(
-        "container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl columns-2 lg:columns-3 xl:columns-4 xxl:columns-5 gap-3"
+        " container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl columns-2 lg:columns-3 xl:columns-4 xxl:columns-5 gap-3"
       )}
     >
       {console.log(trendingGif[5])}
