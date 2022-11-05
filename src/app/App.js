@@ -2,7 +2,7 @@ import React from "react";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Routes from "../routes";
-import { AppStore } from "../stores";
+import { AppStore, SearchStore, TrendingStore } from "../stores";
 
 const browserHistory = createBrowserHistory();
 
@@ -11,7 +11,11 @@ const App = () => {
     <div>
       <Router history={browserHistory}>
         <AppStore.Provider>
-          <Routes />
+          <TrendingStore.Provider>
+            <SearchStore.Provider>
+              <Routes />
+            </SearchStore.Provider>
+          </TrendingStore.Provider>
         </AppStore.Provider>
       </Router>
     </div>
