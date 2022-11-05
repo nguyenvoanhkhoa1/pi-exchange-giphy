@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-const GiphyItem = (props) => {
+const GifItem = (props) => {
   const { className, item, ...rest } = props;
   return (
     <div className={clsx(className, "mb-3 bg-slate-500 rounded")}>
@@ -66,4 +66,4 @@ const GiphyItem = (props) => {
   );
 };
 
-export default GiphyItem;
+export default GifItem;

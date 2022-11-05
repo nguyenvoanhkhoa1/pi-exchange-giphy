@@ -21,7 +21,9 @@ const Main = (props) => {
       {/* <Favicon url={LogoImg} /> */}
       <Helmet>{/* <title>{configsStore.activeTitle || ''}</title> */}</Helmet>
       <Topbar />
-      <main>{children}</main>
+      <main className="container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl">
+        {children}
+      </main>
       <Footer />
     </div>
   );
