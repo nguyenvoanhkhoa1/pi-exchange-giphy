@@ -33,7 +33,11 @@ module.exports = {
       "3/4": "75%",
       full: "100%",
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "search-button": "linear-gradient(45deg, #93f 0%, #f66 50%, #93f 100%)",
+      },
+    },
   },
   plugins: [
     require("@tailwindcss/line-clamp"),

@@ -30,6 +30,10 @@ module.exports = {
         include: path.resolve(__dirname, "src"),
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
+      {
+        test: /\.(jpe?g|png|gif|svg|webp|ico)$/i,
+        use: ["url-loader?limit=10000", "img-loader"],
+      },
     ],
   },
   devServer: {
