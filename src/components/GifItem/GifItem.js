@@ -15,10 +15,10 @@ const GifItem = (props) => {
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in">
           <div className=" absolute top-1 left-0 right-3 flex justify-end items-center gap-3">
             <span className=" text-white cursor-pointer hover:scale-110 transition-transform duration-150">
-              <i class="fa-solid fa-link" />
+              <i className="fa-solid fa-link" />
             </span>
             <span className=" text-white cursor-pointer hover:scale-110 transition-transform duration-150">
-              <i class="fa-solid fa-heart" />
+              <i className="fa-solid fa-heart" />
             </span>
           </div>
         </div>

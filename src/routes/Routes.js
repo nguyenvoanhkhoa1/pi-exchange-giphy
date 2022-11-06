@@ -8,7 +8,7 @@ import {
 import { RouteWithLayout, BrandLoading } from "../components";
 import { Main as MainLayout } from "../layouts";
 import { routeUrls } from "../configs";
-import { HomepageView } from "./views";
+import { HomepageView, SearchView } from "./views";
 
 const Routes = () => {
   return (
@@ -22,7 +22,13 @@ const Routes = () => {
               layout={MainLayout}
               path={`/${routeUrls.homepage.path}`}
             />
-            <Redirect to={`/${routeUrls.homepage.path}`} />
+            <RouteWithLayout
+              component={SearchView}
+              exact
+              layout={MainLayout}
+              path={`/${routeUrls.search.path}/:keyword`}
+            />
+            <Redirect from="/*" to={`/${routeUrls.homepage.path}`} />
           </>
         </Switch>
       </Suspense>
