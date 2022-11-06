@@ -1,7 +1,7 @@
 import { createStore } from "./store";
 export const TrendingStore = createStore({
   filter: {
-    api_key: process.env.API_KEY,
+    api_key: process.env.REACT_APP_API_KEY,
     limit: "",
     offset: "",
     rating: "",

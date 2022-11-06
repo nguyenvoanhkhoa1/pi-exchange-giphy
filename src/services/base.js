@@ -11,7 +11,7 @@ export const handleError = (error) => {
 
 export const createInstance = (path) => {
   const instance = axios.create({
-    baseURL: `${process.env.API_URL}${path}`,
+    baseURL: `${process.env.REACT_APP_API_URL}${path}`,
   });
 
   instance.interceptors.request.use((request) => request);
