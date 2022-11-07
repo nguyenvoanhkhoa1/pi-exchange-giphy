@@ -7,7 +7,10 @@ const GifItem = (props) => {
   const { className, item, ...rest } = props;
   const [favorite, setFavorite] = useState(false);
   return (
-    <div key={item?.id} className={clsx(className, "bg-slate-500 rounded")}>
+    <div
+      key={item?.id}
+      className={clsx(className, "bg-slate-500 rounded mb-3")}
+    >
       <div className="w-full h-full relative group">
         <NavLink to={`/${routeUrls.gifs.path}/${item?.slug}`}>
           <img
