@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { getSearchResultGif } from "../../services/gif/gif.service";
 import { useAppStore, useSearchStore } from "../../stores";
-import { GifMasonry } from "../../components";
+import { GifMasonry, Loading } from "../../components";
+import { TABLE } from "../../configs";
 
 const Search = () => {
-  const [appStore, updateAppStore] = useAppStore();
   const [searchStore, updateSearchStore] = useSearchStore();
 
   const routeLocation = useLocation();
-  const history = useHistory();
 
   const keyword =
     routeLocation.pathname.split("/").at(-1) || searchStore.filter.q;
@@ -27,7 +26,7 @@ const Search = () => {
       switch (res.status) {
         case httpStatus.OK: {
           const { data } = res;
-          setResultGif(data?.data);
+          setResultGif((pre) => [...pre, ...data.data]);
           console.log(data?.pagination?.total_count);
           setTotalCount(data?.pagination?.total_count);
           break;
@@ -45,10 +44,23 @@ const Search = () => {
 
   useEffect(() => {
     fetchResultGif();
-    return () => {
-      setResultGif([]);
+  }, [keyword, searchStore.filter.offset]);
+
+  useEffect(() => {
+    const handleScroll = (e) => {
+      const scrollHeight = e.target.documentElement.scrollHeight;
+      const currentHeight =
+        e.target.documentElement.scrollTop + window.innerHeight;
+      if (currentHeight + 1 >= scrollHeight) {
+        let newOffset = searchStore.filter.offset + TABLE.defaultLimit;
+        updateSearchStore((draft) => {
+          draft.filter.offset = newOffset;
+        });
+      }
     };
-  }, [keyword]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [searchStore.filter.offset]);
 
   return (
     <div>
@@ -60,6 +72,7 @@ const Search = () => {
           </span>
         </div>
         <GifMasonry items={resultGif} />
+        <Loading />
       </>
     </div>
   );

@@ -5,7 +5,7 @@ export const SearchStore = createStore({
     api_key: process.env.REACT_APP_API_KEY,
     q: "",
     limit: TABLE.defaultLimit,
-    offset: "",
+    offset: 0,
     rating: "",
     lang: "",
     random_id: "",
