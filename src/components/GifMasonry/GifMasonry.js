@@ -15,13 +15,19 @@ const GifMasonry = (props) => {
   };
 
   return (
-    <Masonry
-      breakpointCols={breakpointColumnsObj}
-      className="my-masonry-grid"
-      columnClassName="my-masonry-grid_column"
-    >
+    // <Masonry
+    //   breakpointCols={breakpointColumnsObj}
+    //   className="my-masonry-grid"
+    //   columnClassName="my-masonry-grid_column"
+    // >
+    //   {!!items?.length && items?.map((item, index) => <GifItem item={item} />)}
+    // </Masonry>
+    // <div className="columns-2 lg:columns-3 xl:columns-4 xxl:columns-5 gap-3">
+    //   {!!items && items.map((item, index) => <GifItem item={item} />)}
+    // </div>
+    <div className="mb-5 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 gap-3">
       {!!items && items.map((item, index) => <GifItem item={item} />)}
-    </Masonry>
+    </div>
   );
 };
 
