@@ -1,34 +1,39 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { routeUrls } from "../../configs";
 
 const GifItem = (props) => {
   const { className, item, ...rest } = props;
+  const [favorite, setFavorite] = useState(false);
   return (
-    <NavLink
-      to={`/${routeUrls.gifs.path}/${item?.slug}`}
-      key={item?.id}
-      className={clsx(className, "bg-slate-500 rounded")}
-    >
+    <div key={item?.id} className={clsx(className, "bg-slate-500 rounded")}>
       <div className="w-full h-full relative group">
-        <img
-          className="w-full h-full rounded object-cover"
-          src={item?.images?.downsized?.url}
-          alt=""
-        />
+        <NavLink to={`/${routeUrls.gifs.path}/${item?.slug}`}>
+          <img
+            className="w-full h-full rounded object-cover"
+            src={item?.images?.downsized?.url}
+            alt=""
+          />
+        </NavLink>
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in">
           <div className=" absolute top-1 left-0 right-3 flex justify-end items-center gap-3">
             <span className=" text-white cursor-pointer hover:scale-110 transition-transform duration-150">
               <i className="fa-solid fa-link" />
             </span>
-            <span className=" text-white cursor-pointer hover:scale-110 transition-transform duration-150">
-              <i className="fa-solid fa-heart" />
+            <span
+              className=" text-white cursor-pointer hover:scale-110 transition-transform duration-150"
+              onClick={() => setFavorite(!favorite)}
+            >
+              <i
+                className="fa-solid fa-heart"
+                style={favorite ? { color: "#e41147" } : {}}
+              ></i>
             </span>
           </div>
         </div>
-        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in">
-          <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none bg-gradient-to-b from-[#0000] to-[#12121299] cursor-default"></div>
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in pointer-events-none">
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-[#0000] to-[#12121299] cursor-default"></div>
           <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
             {!!item?.user && (
               <>
@@ -68,7 +73,7 @@ const GifItem = (props) => {
           </div>
         </div>
       </div>
-    </NavLink>
+    </div>
   );
 };
 

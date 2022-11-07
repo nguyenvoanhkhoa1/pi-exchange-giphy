@@ -243,20 +243,22 @@ const GifDetail = () => {
       </div>
       <div className="col-span-3 pt-12 flex flex-col gap-3">
         <div
-          className="p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900"
+          className="group p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900"
           onClick={() => setFavorite(!favorite)}
         >
           <i
-            className="fa-solid fa-heart"
+            className="fa-solid fa-heart group-hover:scale-110 transition-transform duration-150"
             style={favorite ? { color: "#e41147" } : {}}
           ></i>
           Favorite
         </div>
-        <div className="p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900">
-          <i className="fa-solid fa-paper-plane"></i>Share
+        <div className="group p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900">
+          <i className="fa-solid fa-paper-plane group-hover:scale-110 transition-transform duration-150"></i>
+          Share
         </div>
-        <div className="p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900">
-          <i className="fa-solid fa-code"></i>Embed
+        <div className="group p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900">
+          <i className="fa-solid fa-code group-hover:scale-110 transition-transform duration-150"></i>
+          Embed
         </div>
       </div>
     </div>
