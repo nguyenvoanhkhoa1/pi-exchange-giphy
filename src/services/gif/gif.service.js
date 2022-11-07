@@ -23,7 +23,7 @@ export const getSearchResultGif = async (filter) => {
     if (filter) {
       query += buildQueryString(filter);
     }
-    const res = await services.post(query);
+    const res = await services.get(query);
     return res;
   } catch (error) {
     return handleError(error);

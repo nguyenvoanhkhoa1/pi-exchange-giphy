@@ -1,23 +1,39 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import SearchIcon from "../../../../assets/images/search-icon.svg";
 import { routeUrls } from "../../../../configs";
+import { useSearchStore } from "../../../../stores";
 
 const Topbar = () => {
-  const history = useHistory();
-  const [keyword, setKeyword] = useState("");
+  const [searchStore, updateSearchStore] = useSearchStore();
+  const routeLocation = useLocation();
+
+  const [keyword, setKeyword] = useState(
+    routeLocation.pathname.split("/")[1] === routeUrls.search.path
+      ? routeLocation.pathname.split("/").at(-1)
+      : ""
+  );
+
+  const handleChangeKeyWord = (e) => {
+    updateSearchStore((draft) => {
+      draft.filter.q = e.target.value;
+    });
+  };
 
   const goSearch = () => {
     if (keyword === "") return;
-    history.push(`/${routeUrls.search.path}/${keyword}`);
+    document.getElementById("search-btn").click();
   };
+  useEffect(() => {
+    setKeyword(searchStore.filter.q);
+  }, [searchStore.filter.q]);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl">
       <div className="my-3 sticky rounded flex flex-wrap top-0 left-0 h-[52px] p-0 m-0 z-0 gap-3">
         <div className="grow border-0 h-[52px] z-[1] flex">
-          <form className="bg-white flex grow relative items-center rounded overflow-hidden">
+          <div className="bg-white flex grow relative items-center rounded overflow-hidden">
             {!keyword && (
               <div>
                 <div className=" select-none overflow-hidden bg-white h-full left-0 z-0 top-0 text-[#a6a6a6] absolute w-full tracking-wide text-lg">
@@ -43,8 +59,8 @@ const Topbar = () => {
               className=" bg-[#fff] appearance-none rounded-none w-full border-0 m-0 z-[2] float-left relative h-[52px] tracking-wide text-lg p-[17px] focus-visible:outline-none"
               style={{ backgroundColor: "transparent" }}
               value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              onKeyUp={(event) => {
+              onChange={(e) => handleChangeKeyWord(e)}
+              onKeyDown={(event) => {
                 if (event.keyCode === 13) {
                   // Cancel the default action, if needed
                   event.preventDefault();
@@ -54,17 +70,18 @@ const Topbar = () => {
               }}
             />
             <button type="submit" className="hidden" />
-          </form>
+          </div>
         </div>
-        <button
+        <Link
+          id="search-btn"
+          to={keyword !== "" ? `/${routeUrls.search.path}/${keyword}` : "#"}
           className="relative h-[52px] w-[52px] flex justify-center items-center cursor-pointer"
-          onClick={() => goSearch()}
         >
           <div className="search-button"></div>
           <div className="z-[1] flex">
-            <img className="w-[30px]" src={SearchIcon} />
+            <img className="w-[30px]" src={SearchIcon} alt="" />
           </div>
-        </button>
+        </Link>
       </div>
     </div>
   );
