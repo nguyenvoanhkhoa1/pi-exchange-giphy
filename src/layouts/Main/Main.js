@@ -24,7 +24,7 @@ const Main = (props) => {
       <main className="container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl">
         {children}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

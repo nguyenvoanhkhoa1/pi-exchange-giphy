@@ -8,7 +8,7 @@ import {
 import { RouteWithLayout, BrandLoading } from "../components";
 import { Main as MainLayout } from "../layouts";
 import { routeUrls } from "../configs";
-import { HomepageView, SearchView } from "./views";
+import { GifDetailView, HomepageView, SearchView } from "./views";
 
 const Routes = () => {
   return (
@@ -26,6 +26,12 @@ const Routes = () => {
             exact
             layout={MainLayout}
             path={`/${routeUrls.search.path}/:slug`}
+          />
+          <RouteWithLayout
+            component={GifDetailView}
+            exact
+            layout={MainLayout}
+            path={`/${routeUrls.gifs.path}/:slug`}
           />
           <Redirect from="/*" to={`/${routeUrls.homepage.path}`} />
         </Switch>

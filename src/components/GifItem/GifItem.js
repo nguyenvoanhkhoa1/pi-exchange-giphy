@@ -1,16 +1,21 @@
 import clsx from "clsx";
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { routeUrls } from "../../configs";
 
 const GifItem = (props) => {
   const { className, item, ...rest } = props;
   return (
-    <div className={clsx(className, "mb-3 bg-slate-500 rounded")}>
-      <div className="relative group">
+    <NavLink
+      to={`/${routeUrls.gifs.path}/${item?.slug}`}
+      key={item?.id}
+      className={clsx(className, "bg-slate-500 rounded")}
+    >
+      <div className="w-full h-full relative group">
         <img
-          className="w-full h-auto rounded"
+          className="w-full h-full rounded object-cover"
           src={item?.images?.downsized?.url}
           alt=""
-          key={item?.id}
         />
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in">
           <div className=" absolute top-1 left-0 right-3 flex justify-end items-center gap-3">
@@ -30,6 +35,7 @@ const GifItem = (props) => {
                 <img
                   className=" w-10 h-10 shrink-0 object-cover"
                   src={item?.user?.avatar_url}
+                  alt=""
                 />
                 <div className=" text-white text-base font-bold overflow-hidden text-ellipsis whitespace-nowrap antialiased">
                   {item?.user?.display_name}
@@ -62,7 +68,7 @@ const GifItem = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </NavLink>
   );
 };
 

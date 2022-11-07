@@ -1,11 +1,15 @@
 const routeUrls = {
   homepage: {
-    path: "",
+    path: "homepage",
     title: "Homepage",
   },
   search: {
     path: "search",
     title: "Search",
+  },
+  gifs: {
+    path: "gifs",
+    title: "Gifs",
   },
 };
 

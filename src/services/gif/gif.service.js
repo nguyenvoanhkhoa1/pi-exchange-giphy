@@ -29,3 +29,16 @@ export const getSearchResultGif = async (filter) => {
     return handleError(error);
   }
 };
+
+export const getGifById = async (id, filter) => {
+  try {
+    let query = `${baseUrl}/${id}`;
+    if (filter) {
+      query += buildQueryString(filter);
+    }
+    const res = await services.get(query);
+    return res;
+  } catch (error) {
+    return handleError(error);
+  }
+};

@@ -44,3 +44,12 @@ body {
   @apply pl-3;
   background-clip: padding-box;
 }
+
+.limitLine1 {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
