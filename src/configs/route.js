@@ -1,6 +1,6 @@
 const routeUrls = {
   homepage: {
-    path: "homepage",
+    path: "",
     title: "Homepage",
   },
   search: {

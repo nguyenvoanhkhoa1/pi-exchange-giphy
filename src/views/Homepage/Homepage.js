@@ -3,22 +3,16 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { getTrendingGif } from "../../services/gif/gif.service";
 import { useAppStore, useTrendingStore } from "../../stores";
-import clsx from "clsx";
-import { GifMasonry } from "../../components";
+import { GifMasonry, Loading } from "../../components";
+import { TABLE } from "../../configs";
 
 const Homepage = () => {
-  const [appStore, updateAppStore] = useAppStore();
   const [trendingStore, updateTrendingStore] = useTrendingStore();
-
-  const routeLocation = useLocation();
-  const history = useHistory();
 
   const [trendingGif, setTrendingGif] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchTrendingGif = async () => {
-    // updateTrendingStore((draft) => {
-    // });
     if (isLoading) return null;
     setIsLoading(true);
     const res = await getTrendingGif(trendingStore.filter);
@@ -27,7 +21,7 @@ const Homepage = () => {
         case httpStatus.OK: {
           const { data } = res;
           console.log(data);
-          setTrendingGif(data.data);
+          setTrendingGif((pre) => [...pre, ...data.data]);
           break;
         }
         case httpStatus.NOT_FOUND: {
@@ -37,18 +31,29 @@ const Homepage = () => {
           break;
       }
     }
-    // updateTrendingStore(draft => {
-    // });
     setIsLoading(false);
     return null;
   };
 
   useEffect(() => {
     fetchTrendingGif();
-    return () => {
-      setTrendingGif([]);
+  }, [trendingStore.filter.offset]);
+
+  useEffect(() => {
+    const handleScroll = (e) => {
+      const scrollHeight = e.target.documentElement.scrollHeight;
+      const currentHeight =
+        e.target.documentElement.scrollTop + window.innerHeight;
+      if (currentHeight + 1 >= scrollHeight) {
+        let newOffset = trendingStore.filter.offset + TABLE.defaultLimit;
+        updateTrendingStore((draft) => {
+          draft.filter.offset = newOffset;
+        });
+      }
     };
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [trendingStore.filter.offset]);
 
   return (
     <>
@@ -81,6 +86,7 @@ const Homepage = () => {
         Trending GIFs
       </div>
       <GifMasonry items={trendingGif} />
+      <Loading />
     </>
   );
 };

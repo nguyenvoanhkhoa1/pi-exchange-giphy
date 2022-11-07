@@ -1,3 +1,10 @@
 export const TABLE = {
-  defaultLimit: 12,
+  defaultLimit:
+    window.innerWidth > 1536
+      ? 30
+      : window.innerWidth > 1280
+      ? 24
+      : window.innerWidth > 1024
+      ? 18
+      : 12,
 };

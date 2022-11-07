@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import moment from "moment";
 import { getGifById } from "../../services/gif/gif.service";
 import FacebookIcon from "../../assets/images/facebook.png";
@@ -8,9 +8,11 @@ import InstagramIcon from "../../assets/images/instagram.png";
 import TumblrIcon from "../../assets/images/tumblr.png";
 import TwitterIcon from "../../assets/images/twitter.png";
 import YoutubeIcon from "../../assets/images/youtube.png";
+import { routeUrls } from "../../configs";
 
 const GifDetail = () => {
   const routeLocation = useLocation();
+  const history = useHistory();
   const id = routeLocation.pathname.split("/").at(-1).split("-").at(-1);
 
   const [data, setData] = useState({});
@@ -50,6 +52,8 @@ const GifDetail = () => {
           break;
         }
         case httpStatus.NOT_FOUND: {
+          console.log(res.status);
+          history.push(routeUrls.homepage.path);
           break;
         }
         default:
