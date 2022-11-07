@@ -38,7 +38,7 @@ const Topbar = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl flex items-center gap-4">
+    <div className="container mx-auto px-4 sm:px-6 xl:px-0 lg:max-w-5xl flex items-center gap-4">
       <button onClick={() => goHome()}>
         <img className="h-[52px] w-auto" src={LogoImg} alt="" />
       </button>
