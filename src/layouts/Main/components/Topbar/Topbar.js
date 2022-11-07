@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
 
+import LogoImg from "../../../../assets/images/PI_logo.png";
 import SearchIcon from "../../../../assets/images/search-icon.svg";
 import { routeUrls } from "../../../../configs";
 import { useSearchStore } from "../../../../stores";
@@ -15,7 +16,9 @@ const Topbar = () => {
   const handleChangeKeyWord = (e) => {
     setKeyword(e.target.value);
   };
-
+  const goHome = () => {
+    history.push(routeUrls.homepage.path);
+  };
   const goSearch = () => {
     if (keyword !== "") {
       updateSearchStore((draft) => {
@@ -35,8 +38,11 @@ const Topbar = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl">
-      <div className="my-3 sticky rounded flex flex-wrap top-0 left-0 h-[52px] p-0 m-0 z-0 gap-3">
+    <div className="container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl flex items-center gap-4">
+      <button onClick={() => goHome()}>
+        <img className="h-[52px] w-auto" src={LogoImg} alt="" />
+      </button>
+      <div className="my-3 sticky rounded flex flex-wrap top-0 left-0 h-[52px] w-full p-0 m-0 z-0 gap-3">
         <div className="grow border-0 h-[52px] z-[1] flex">
           <div className="bg-white flex grow relative items-center rounded overflow-hidden">
             {!keyword && (
