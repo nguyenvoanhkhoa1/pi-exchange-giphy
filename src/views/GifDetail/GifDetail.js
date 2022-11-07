@@ -190,13 +190,13 @@ const GifDetail = () => {
           </span>
           <a
             className="flex items-center text-sm font-semibold text-white"
-            href={data?.source}
+            href={data?.source || data?.user?.website_url}
             target="_blank"
             rel="noopener noreferrer"
           >
             <i className="fa-regular fa-share-from-square mr-2"></i>
             <span className=" limitLine1 whitespace-nowrap">
-              {data?.source}
+              {data?.source || data?.user?.website_url}
             </span>
           </a>
         </div>
@@ -223,7 +223,9 @@ const GifDetail = () => {
               </div>
               <div>Uploaded: {convertDate(data?.import_datetime)}</div>
               <div>Size: {data?.images?.original?.size} KB</div>
-              <div>Rating: {data?.rating}</div>
+              <div>
+                Rating: <span className=" uppercase">{data?.rating}</span>
+              </div>
               <div>Frames: {data?.images?.original?.frames}</div>
             </div>
           )}
