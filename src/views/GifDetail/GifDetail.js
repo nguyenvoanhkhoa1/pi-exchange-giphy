@@ -16,6 +16,7 @@ const GifDetail = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   const createBody = () => {
     let body = {};
@@ -213,7 +214,7 @@ const GifDetail = () => {
             </button>
           </span>
         </div>
-        <div className="relative">
+        <div className="relative group">
           {!!showDetail && (
             <div className="absolute top-[6px] left-[6px] right-[6px] bg-[#000000e6] p-4 overflow-hidden grid grid-cols-2 text-white gap-y-[6px]">
               <div>
@@ -231,11 +232,22 @@ const GifDetail = () => {
             src={data?.images?.original?.url}
             alt=""
           />
+          <div className="absolute bottom-0 left-0 opacity-0 group-hover:opacity-100 p-[10px] translate-y-4 group-hover:translate-y-0 transition-[opacity_.2s_ease-out,_transform_.2s_ease-out]">
+            <button className="h-9 w-9 shrink-0 flex items-center justify-center bg-[#000c] text-white">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
         </div>
       </div>
       <div className="col-span-3 pt-12 flex flex-col gap-3">
-        <div className="p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900">
-          <i className="fa-solid fa-heart"></i>
+        <div
+          className="p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900"
+          onClick={() => setFavorite(!favorite)}
+        >
+          <i
+            className="fa-solid fa-heart"
+            style={favorite ? { color: "#e41147" } : {}}
+          ></i>
           Favorite
         </div>
         <div className="p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900">
