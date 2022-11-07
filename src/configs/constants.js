@@ -1,3 +1,3 @@
 export const TABLE = {
-  defaultLimit: 24,
+  defaultLimit: 12,
 };

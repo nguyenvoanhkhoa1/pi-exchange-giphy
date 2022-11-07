@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 import SearchIcon from "../../../../assets/images/search-icon.svg";
 import { routeUrls } from "../../../../configs";
@@ -7,27 +7,32 @@ import { useSearchStore } from "../../../../stores";
 
 const Topbar = () => {
   const [searchStore, updateSearchStore] = useSearchStore();
+  const history = useHistory();
   const routeLocation = useLocation();
 
-  const [keyword, setKeyword] = useState(
-    routeLocation.pathname.split("/")[1] === routeUrls.search.path
-      ? routeLocation.pathname.split("/").at(-1)
-      : ""
-  );
+  const [keyword, setKeyword] = useState("");
 
   const handleChangeKeyWord = (e) => {
-    updateSearchStore((draft) => {
-      draft.filter.q = e.target.value;
-    });
+    setKeyword(e.target.value);
   };
 
   const goSearch = () => {
-    if (keyword === "") return;
-    document.getElementById("search-btn").click();
+    if (keyword !== "") {
+      updateSearchStore((draft) => {
+        draft.filter.q = keyword;
+      });
+      console.log(searchStore.filter);
+      history.push(`/${routeUrls.search.path}/${keyword}`);
+    }
+    // document.getElementById("search-btn").click();
   };
   useEffect(() => {
-    setKeyword(searchStore.filter.q);
-  }, [searchStore.filter.q]);
+    setKeyword(
+      routeLocation.pathname.split("/")[1] === routeUrls.search.path
+        ? routeLocation.pathname.split("/").at(-1)
+        : ""
+    );
+  }, []);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 xl:px-0 xl:max-w-6xl">
@@ -72,16 +77,17 @@ const Topbar = () => {
             <button type="submit" className="hidden" />
           </div>
         </div>
-        <Link
+        <button
           id="search-btn"
-          to={keyword !== "" ? `/${routeUrls.search.path}/${keyword}` : "#"}
+          // to={keyword !== "" ? `/${routeUrls.search.path}/${keyword}` : "#"}
           className="relative h-[52px] w-[52px] flex justify-center items-center cursor-pointer"
+          onClick={() => goSearch()}
         >
           <div className="search-button"></div>
           <div className="z-[1] flex">
             <img className="w-[30px]" src={SearchIcon} alt="" />
           </div>
-        </Link>
+        </button>
       </div>
     </div>
   );

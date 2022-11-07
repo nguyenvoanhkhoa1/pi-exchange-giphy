@@ -48,7 +48,7 @@ const Search = () => {
     return () => {
       setResultGif([]);
     };
-  }, []);
+  }, [keyword]);
 
   return (
     <div>
