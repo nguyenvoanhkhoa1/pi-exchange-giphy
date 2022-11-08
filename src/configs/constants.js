@@ -15,3 +15,9 @@ export const SEARCH = {
     defaultTimeout: 1000,
   },
 };
+
+export const ACTION = {
+  favorite: 1,
+  share: 2,
+  embed: 3,
+};

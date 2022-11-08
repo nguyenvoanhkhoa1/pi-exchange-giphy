@@ -8,7 +8,7 @@ import InstagramIcon from "../../assets/images/instagram.png";
 import TumblrIcon from "../../assets/images/tumblr.png";
 import TwitterIcon from "../../assets/images/twitter.png";
 import YoutubeIcon from "../../assets/images/youtube.png";
-import { routeUrls } from "../../configs";
+import { routeUrls, ACTION } from "../../configs";
 import { Modal } from "../../components";
 
 const GifDetail = () => {
@@ -21,6 +21,8 @@ const GifDetail = () => {
   const [showDetail, setShowDetail] = useState(false);
   const [openZoomModal, setOpenZoomModal] = useState(false);
   const [favorite, setFavorite] = useState(false);
+  const [activeAction, setActiveAction] = useState(0);
+  const [isCopyEmbed, setIsCopyEmbed] = useState(false);
 
   const createBody = () => {
     let body = {};
@@ -254,6 +256,113 @@ const GifDetail = () => {
                 <i className="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
+            {(activeAction === ACTION.share ||
+              activeAction === ACTION.embed) && (
+              <div className="absolute inset-0 bg-[#000c]">
+                <div className=" h-12 flex justify-between items-center mx-6 border-b border-b-[#d8d8d880] border-solid text-white">
+                  <span className="capitalize font-extrabold">
+                    {activeAction === ACTION.share ? "Share GIF" : "Embed GIF"}
+                  </span>
+                  <button
+                    className=" flex justify-center items-center"
+                    onClick={() => setActiveAction(0)}
+                  >
+                    <i className="fa-solid fa-xmark fa-lg"></i>
+                  </button>
+                </div>
+                {activeAction === ACTION.share && (
+                  <div className="h-[calc(100%-48px)] flex items-center justify-center">
+                    <div className=" flex flex-col">
+                      <div className="flex items-center gap-2">
+                        <span className=" bg-white h-[42px] flex items-center justify-center rounded-md cursor-pointer">
+                          <i class="text-[#3b5998] fa-3x fa-brands fa-square-facebook"></i>
+                        </span>
+                        <span className=" bg-white h-[42px] flex items-center justify-center rounded-md cursor-pointer">
+                          <i class="text-[#1DA1F2] fa-3x fa-brands fa-square-twitter"></i>
+                        </span>
+                        <span className=" bg-white h-[42px] flex items-center justify-center rounded-md cursor-pointer">
+                          <i class="text-[#34526f] fa-3x fa-brands fa-square-tumblr"></i>
+                        </span>
+                        <span className=" bg-white h-[42px] flex items-center justify-center rounded-md cursor-pointer">
+                          <i class="text-[#F0002A] fa-3x fa-brands fa-square-pinterest"></i>
+                        </span>
+                        <span className=" bg-white h-[42px] flex items-center justify-center rounded-md cursor-pointer">
+                          <i class="text-[#FF4500] fa-3x fa-brands fa-square-reddit"></i>
+                        </span>
+                        <span className=" bg-white h-[42px] flex items-center justify-center rounded-md cursor-pointer">
+                          <i class="text-[#ff1493] fa-3x fa-brands fa-square-instagram"></i>
+                        </span>
+                      </div>
+                      <button
+                        className="mt-3 h-10 w-full shrink-0 font-bold transition-[background-color_0.1s_ease-out_0s] rounded flex items-center justify-center gap-2"
+                        style={
+                          isCopyEmbed
+                            ? { background: "#0f9", color: "black" }
+                            : {
+                                backgroundImage:
+                                  "linear-gradient(45deg, #93f 0%, #6157ff 100%)",
+                                color: "white",
+                              }
+                        }
+                        onClick={() => {
+                          navigator.clipboard.writeText(window.location.href);
+                          setIsCopyEmbed(true);
+                          setTimeout(() => {
+                            setIsCopyEmbed(false);
+                          }, 3000);
+                        }}
+                      >
+                        {!isCopyEmbed && <i className="fa-solid fa-link" />}
+                        <span>
+                          {isCopyEmbed ? "Link copied!" : "Copy GIF Link"}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {activeAction === ACTION.embed && (
+                  <div className="p-7 text-white text-[15px]">
+                    <div className=" leading-[19px] my-[10px]">
+                      Want to embed this GIF on your website or blog?
+                      <br />
+                      Just drop in the embed code below and you're done!
+                    </div>
+                    {/* <div className=" font-bold mt-5 mb-[10px]">Responsive</div>
+                    <div className="flex">
+                      <div></div>
+                      <div>On</div>
+                      <div>Off</div>
+                    </div> */}
+                    <div className=" font-bold mt-5 mb-[10px]">Embed Code</div>
+                    <div className=" flex">
+                      <div className="limitLine1 whitespace-nowrap bg-white w-full text-black text-sm relative overflow-hidden p-[11px] embed-code h-10">
+                        {data?.embed_url}
+                      </div>
+                      <button
+                        className="h-10 w-36 shrink-0 font-bold transition-[background-color_0.1s_ease-out_0s]"
+                        style={
+                          isCopyEmbed
+                            ? { background: "#0f9", color: "black" }
+                            : {
+                                backgroundImage:
+                                  "linear-gradient(45deg, #93f 0%, #6157ff 100%)",
+                              }
+                        }
+                        onClick={() => {
+                          navigator.clipboard.writeText(data?.embed_url);
+                          setIsCopyEmbed(true);
+                          setTimeout(() => {
+                            setIsCopyEmbed(false);
+                          }, 3000);
+                        }}
+                      >
+                        {isCopyEmbed ? "Link copied!" : "Copy Code"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
         {/* Actions */}
@@ -268,11 +377,21 @@ const GifDetail = () => {
             ></i>
             Favorite
           </div>
-          <div className="group p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900">
+          <div
+            className="group p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900"
+            onClick={() => {
+              setActiveAction(ACTION.share);
+            }}
+          >
             <i className="fa-solid fa-paper-plane group-hover:scale-110 transition-transform duration-150"></i>
             Share
           </div>
-          <div className="group p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900">
+          <div
+            className="group p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900"
+            onClick={() => {
+              setActiveAction(ACTION.embed);
+            }}
+          >
             <i className="fa-solid fa-code group-hover:scale-110 transition-transform duration-150"></i>
             Embed
           </div>
