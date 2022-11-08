@@ -10,5 +10,5 @@ export const TABLE = {
 };
 
 export const SEARCH = {
-  autocomplete: { defaultLimit: 5 },
+  autocomplete: { defaultLimit: 4 },
 };
