@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 import LogoImg from "../../../../assets/images/PI_logo.png";
 import SearchIcon from "../../../../assets/images/search-icon.svg";
@@ -73,7 +73,6 @@ const Topbar = () => {
         case httpStatus.OK: {
           const { data } = res;
           setAutocomplete(data.data);
-          console.log(data);
           break;
         }
         case httpStatus.NOT_FOUND: {

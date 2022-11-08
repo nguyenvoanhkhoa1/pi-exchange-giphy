@@ -1,8 +1,7 @@
 import httpStatus from "http-status";
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
 import { getTrendingGif } from "../../services/gif/gif.service";
-import { useAppStore, useTrendingStore } from "../../stores";
+import { useTrendingStore } from "../../stores";
 import { GifMasonry, Loading } from "../../components";
 import { TABLE } from "../../configs";
 
@@ -20,7 +19,6 @@ const Homepage = () => {
       switch (res.status) {
         case httpStatus.OK: {
           const { data } = res;
-          console.log(data);
           setTrendingGif((pre) => [...pre, ...data.data]);
           break;
         }

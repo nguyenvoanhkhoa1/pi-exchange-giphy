@@ -1,8 +1,8 @@
 import httpStatus from "http-status";
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getSearchResultGif } from "../../services/gif/gif.service";
-import { useAppStore, useSearchStore } from "../../stores";
+import { useSearchStore } from "../../stores";
 import { GifMasonry, Loading } from "../../components";
 import { TABLE } from "../../configs";
 
@@ -26,7 +26,6 @@ const Search = () => {
         case httpStatus.OK: {
           const { data } = res;
           setResultGif(data?.data);
-          console.log(data?.pagination?.total_count);
           setTotalCount(data?.pagination?.total_count);
           break;
         }
@@ -50,7 +49,6 @@ const Search = () => {
         case httpStatus.OK: {
           const { data } = res;
           setResultGif((pre) => [...pre, ...data.data]);
-          console.log(data?.pagination?.total_count);
           setTotalCount(data?.pagination?.total_count);
           break;
         }

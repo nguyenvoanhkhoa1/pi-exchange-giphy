@@ -54,7 +54,6 @@ const GifDetail = () => {
           break;
         }
         case httpStatus.NOT_FOUND: {
-          console.log(res.status);
           history.push(routeUrls.homepage.path);
           break;
         }
@@ -76,7 +75,6 @@ const GifDetail = () => {
   return (
     <>
       <div className="pt-4 pb-10 grid grid-cols-12 gap-6">
-        {console.log(data)}
         <div className="col-span-3">
           {data?.user && (
             <div className=" py-6">
@@ -278,7 +276,7 @@ const GifDetail = () => {
       </div>
       <Modal open={openZoomModal} setOpen={setOpenZoomModal}>
         <img
-          className="z-[1] w-auto h-full shrink-0 object-cover py-4"
+          className="z-[1] w-auto h-full shrink-0 object-cover p-4"
           src={data?.images?.original?.url}
           alt=""
         />
