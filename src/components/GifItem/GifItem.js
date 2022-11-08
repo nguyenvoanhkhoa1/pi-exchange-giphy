@@ -6,6 +6,14 @@ import { routeUrls } from "../../configs";
 const GifItem = (props) => {
   const { className, item, ...rest } = props;
   const [favorite, setFavorite] = useState(false);
+
+  const copyToClipboard = (text) => {
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(text);
+    // Alert the copied text
+    alert("Link copied to clipboard!");
+  };
+
   return (
     <div
       key={item?.id}
@@ -21,7 +29,10 @@ const GifItem = (props) => {
         </NavLink>
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in">
           <div className=" absolute top-1 left-0 right-3 flex justify-end items-center gap-3">
-            <span className=" text-white cursor-pointer hover:scale-110 transition-transform duration-150">
+            <span
+              className=" text-white cursor-pointer hover:scale-110 transition-transform duration-150"
+              onClick={() => copyToClipboard(item?.images?.original?.url)}
+            >
               <i className="fa-solid fa-link" />
             </span>
             <span
