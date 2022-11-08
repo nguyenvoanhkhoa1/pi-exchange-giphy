@@ -3,8 +3,8 @@ import LogoImg from "../../assets/images/PI_logo.png";
 
 const BrandLoading = () => {
   return (
-    <div className="bg-white fixed top-0 left-0 w-screen h-screen">
-      <img className="h-[52px] w-auto" src={LogoImg} alt="" />
+    <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
+      <img className="h-[152px] w-auto" src={LogoImg} alt="" />
     </div>
   );
 };
