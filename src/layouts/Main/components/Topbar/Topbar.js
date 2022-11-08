@@ -1,5 +1,5 @@
 import httpStatus from "http-status";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useHistory } from "react-router-dom";
 
 import LogoImg from "../../../../assets/images/PI_logo.png";
@@ -17,6 +17,7 @@ const Topbar = () => {
   const [keyword, setKeyword] = useState("");
   const [autoComplete, setAutocomplete] = useState([]);
   const [showAutocomplete, setShowAutocomplete] = useState(false);
+  const typingTimeoutRef = useRef(null);
 
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
@@ -86,8 +87,13 @@ const Topbar = () => {
   };
 
   useEffect(() => {
-    if (keyword === "") setKeyword([]);
-    else fetchAutocomplete();
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+    typingTimeoutRef.current = setTimeout(() => {
+      if (keyword === "") setKeyword([]);
+      else fetchAutocomplete();
+    }, SEARCH.autocomplete.defaultTimeout);
   }, [keyword]);
 
   useEffect(() => {
