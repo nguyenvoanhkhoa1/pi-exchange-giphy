@@ -15,7 +15,8 @@ const GifMasonry = (props) => {
   };
 
   return (
-    <div className=" z-0">
+    <div className="">
+      {/* Masonry layout, horizontal with library */}
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
@@ -24,9 +25,13 @@ const GifMasonry = (props) => {
         {!!items?.length &&
           items?.map((item, index) => <GifItem item={item} />)}
       </Masonry>
+
+      {/* Masonry layout with css, vertical, not recommend */}
       {/* <div className="columns-2 lg:columns-3 xl:columns-4 xxl:columns-5 gap-3">
         {!!items && items.map((item, index) => <GifItem item={item} />)}
       </div> */}
+
+      {/* Grid table layout, bad UX */}
       {/* <div className="mb-5 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 gap-3">
         {!!items && items.map((item, index) => <GifItem item={item} />)}
       </div> */}

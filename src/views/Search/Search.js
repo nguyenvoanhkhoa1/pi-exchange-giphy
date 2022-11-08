@@ -68,11 +68,11 @@ const Search = () => {
       draft.filter.offset = 0;
     });
     fetchResultGif();
-  }, [keyword]);
+  }, [keyword]); //Fetch new result when keyword change
 
   useEffect(() => {
     if (searchStore.filter.offset !== 0) loadMoreResultGif();
-  }, [searchStore.filter.offset]);
+  }, [searchStore.filter.offset]); //Load more result when the offset change
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -88,7 +88,7 @@ const Search = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [searchStore.filter.offset]);
+  }, [searchStore.filter.offset]); //Increase the offset when scrolling to the bottom
 
   return (
     <div>

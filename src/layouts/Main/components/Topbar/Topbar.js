@@ -85,6 +85,7 @@ const Topbar = () => {
     return null;
   };
 
+  //Search debounce
   useEffect(() => {
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
@@ -161,7 +162,7 @@ const Topbar = () => {
               </span>
               <button type="submit" className="hidden" />
             </div>
-            {!!showAutocomplete && (
+            {!!showAutocomplete && ( //Show recommend search result
               <div className="mt-[2px] h-0">
                 <div className="rounded z-20 bg-white overflow-hidden grid grid-cols-4">
                   {autoComplete.map((item, index) => (
@@ -188,6 +189,7 @@ const Topbar = () => {
           </button>
         </div>
       </div>
+      {/* Scroll to top button */}
       <button
         className={`${
           onTopScreen ? "fixed -bottom-14" : "fixed bottom-5"

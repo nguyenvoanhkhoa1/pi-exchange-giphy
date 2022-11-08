@@ -76,6 +76,7 @@ const GifDetail = () => {
     <>
       <div className="pt-4 pb-10 grid grid-cols-12 gap-6">
         <div className="col-span-3">
+          {/* User information */}
           {data?.user && (
             <div className=" py-6">
               <div className="flex items-center gap-3">
@@ -123,6 +124,7 @@ const GifDetail = () => {
                 <p className="text-[#a6a6a6] font-semibold text-sm mb-3">
                   Follow on:
                 </p>
+                {/* Social medias */}
                 <div className="flex gap-2 mb-2">
                   {!!data?.user?.facebook_url && (
                     <a
@@ -193,6 +195,7 @@ const GifDetail = () => {
               </div>
             </div>
           )}
+          {/* Source of the gif */}
           <div className=" break-words py-6 flex flex-col">
             <span className="mb-2 text-[#a6a6a6] tracking-wide text-sm capitalize font-semibold">
               Source
@@ -253,6 +256,7 @@ const GifDetail = () => {
             </div>
           </div>
         </div>
+        {/* Actions */}
         <div className="col-span-3 pt-12 flex flex-col gap-3">
           <div
             className="group p-3 rounded cursor-pointer flex items-center h-11 font-bold text-white text-lg gap-4 hover:bg-slate-900"

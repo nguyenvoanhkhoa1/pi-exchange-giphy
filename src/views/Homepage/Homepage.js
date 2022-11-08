@@ -35,7 +35,7 @@ const Homepage = () => {
 
   useEffect(() => {
     fetchTrendingGif();
-  }, [trendingStore.filter.offset]);
+  }, [trendingStore.filter.offset]); //Fetch more gifs when the offset change
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -51,7 +51,7 @@ const Homepage = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [trendingStore.filter.offset]);
+  }, [trendingStore.filter.offset]); //Increase the offset when scrolling to the bottom
 
   return (
     <>
