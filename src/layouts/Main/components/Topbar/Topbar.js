@@ -100,7 +100,7 @@ const Topbar = () => {
 
   return (
     <>
-      <div className="container mx-auto px-4 sm:px-6 xl:px-0 lg:max-w-5xl flex items-center gap-4 z-10 pb-10">
+      <div className="container mx-auto px-4 sm:px-6 xl:px-0 lg:max-w-5xl flex items-center gap-4 z-10">
         <button onClick={() => goHome()}>
           <img className="h-[52px] w-auto" src={LogoImg} alt="" />
         </button>
@@ -158,10 +158,10 @@ const Topbar = () => {
             </div>
             {!!showAutocomplete && (
               <div className="mt-[2px] h-0">
-                <div className="rounded z-20 bg-white overflow-hidden grid grid-cols-2">
+                <div className="rounded z-20 bg-white overflow-hidden grid grid-cols-4">
                   {autoComplete.map((item, index) => (
                     <div
-                      className=" h-14 cursor-pointer flex items-center p-4 hover:bg-slate-200 border-dashed border-[1px]"
+                      className=" h-12 cursor-pointer flex items-center p-4 hover:bg-slate-200 border-dashed border-[1px]"
                       onClick={() => goSearch(item?.name)}
                     >
                       {item?.name}
