@@ -8,3 +8,7 @@ export const TABLE = {
       ? 18
       : 12,
 };
+
+export const SEARCH = {
+  autocomplete: { defaultLimit: 5 },
+};

@@ -18,7 +18,30 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchResultGif = async () => {
-    console.log("fetch");
+    if (isLoading) return null;
+    setIsLoading(true);
+    const res = await getSearchResultGif({ ...searchStore.filter, q: keyword });
+    if (res) {
+      switch (res.status) {
+        case httpStatus.OK: {
+          const { data } = res;
+          setResultGif(data?.data);
+          console.log(data?.pagination?.total_count);
+          setTotalCount(data?.pagination?.total_count);
+          break;
+        }
+        case httpStatus.NOT_FOUND: {
+          break;
+        }
+        default:
+          break;
+      }
+    }
+    setIsLoading(false);
+    return null;
+  };
+
+  const loadMoreResultGif = async () => {
     if (isLoading) return null;
     setIsLoading(true);
     const res = await getSearchResultGif({ ...searchStore.filter, q: keyword });
@@ -43,8 +66,15 @@ const Search = () => {
   };
 
   useEffect(() => {
+    updateSearchStore((draft) => {
+      draft.filter.offset = 0;
+    });
     fetchResultGif();
-  }, [keyword, searchStore.filter.offset]);
+  }, [keyword]);
+
+  useEffect(() => {
+    if (searchStore.filter.offset !== 0) loadMoreResultGif();
+  }, [searchStore.filter.offset]);
 
   useEffect(() => {
     const handleScroll = (e) => {

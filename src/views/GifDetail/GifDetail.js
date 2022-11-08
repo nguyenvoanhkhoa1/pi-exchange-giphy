@@ -115,7 +115,7 @@ const GifDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-5 mb-1 whitespace-pre-wrap text-[#a6a6a6] text-sm">
+            <div className="mt-5 mb-1 whitespace-pre-wrap text-[#a6a6a6] text-sm break-words">
               {data?.user?.description}
             </div>
             <div className="mt-8 flex flex-col">

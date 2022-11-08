@@ -42,3 +42,16 @@ export const getGifById = async (id, filter) => {
     return handleError(error);
   }
 };
+
+export const getSearchAutocomplete = async (filter) => {
+  try {
+    let query = `${baseUrl}/search/tags`;
+    if (filter) {
+      query += buildQueryString(filter);
+    }
+    const res = await services.get(query);
+    return res;
+  } catch (error) {
+    return handleError(error);
+  }
+};
